@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+
+<body class="blog-page">
+    <nav>
+        <a class="blog-nav" href="index.html">Home</a>
+    </nav>
+    <div class="blog-container" id="blog-container"></div>
+    <div id="footer-container"></div>
+
+
+    <script>
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("footer-container").innerHTML = data;
+            })
+            .catch(error => console.error("Error loading footer:", error));
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", async function () {
+            const blogContainer = document.getElementById("blog-container");
+            let fileIndex = 1; // Start from 1
+            let hasMoreFiles = true;
+
+            async function loadBlogs() {
+                while (hasMoreFiles) {
+                    let filePath = `blogs/${fileIndex}.md`;
+
+                    try {
+                        let response = await fetch(filePath);
+                        if (!response.ok) throw new Error("File not found"); // Stop loop on 404
+
+                        let content = await response.text();
+                        const regex = new RegExp("<!--\\s*([\\s\\S]*?)\\s*-->", "m");
+                        let match = content.match(regex);
+                        let hiddenUrl = match ? match[1] : null;
+
+                        let renderedHTML = marked.parse(content);
+
+                        let blogDiv = document.createElement("div");
+                        blogDiv.classList.add("blog-entry");
+                        blogDiv.innerHTML = renderedHTML;
+
+                        convertFirstUnderlineToLink(blogDiv, hiddenUrl);
+
+                        blogContainer.appendChild(blogDiv);
+
+                        // Apply syntax highlighting
+                        document.querySelectorAll("pre code").forEach((block) => {
+                            hljs.highlightElement(block);
+                        });
+
+
+                        // Add separator after each blog
+                        let separator = document.createElement("div");
+                        separator.classList.add("separator");
+                        separator.innerHTML = "<span></span>"; // The centered dot
+                        blogContainer.appendChild(separator);
+
+                        fileIndex++; // Go to next file
+                    } catch (error) {
+                        console.warn(`Stopping at blog ${fileIndex} (file not found)`);
+                        hasMoreFiles = false; // Stop loop if file is missing
+                    }
+                }
+            }
+
+            function convertFirstUnderlineToLink(container, url) {
+                const underlineElement = container.querySelector("u"); // Find the first <u> tag
+                if (underlineElement && url) {
+                    let text = underlineElement.innerText.trim();
+
+                    let anchor = document.createElement("a");
+                    anchor.href = url;
+                    anchor.innerText = text;
+                    anchor.target = "_blank"; // Open in new tab
+                    anchor.rel = "noopener noreferrer"; // Security best practice
+                    anchor.style.textDecoration = "underline"; // Keep the underline look
+                    anchor.style.color = "#007BFF"; // Make it look like a link
+
+                    underlineElement.replaceWith(anchor);
+                }
+            }
+
+
+
+            loadBlogs();
+        });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            hljs.highlightAll();
+        });
+    </script>
+</body>
+
+</html>

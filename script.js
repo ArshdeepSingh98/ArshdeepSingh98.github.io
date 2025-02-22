@@ -8,23 +8,15 @@ const filters = document.querySelectorAll(".projects-filters button");
 
 filters.forEach((button) => {
     button.addEventListener("click", function () {
-        // Remove active class from all buttons
         filters.forEach((btn) => btn.classList.remove("active"));
-
-        // Add active class to the clicked button
         this.classList.add("active");
-
     });
 });
 
 
-// Close Projects Modal when clicking the close button
 document.querySelector(".projects-close").addEventListener("click", function () {
     document.getElementById("projectsModal").classList.remove("active");
 });
-
-
-
 
 const carouselInner = document.querySelector(".projects-carousel-inner");
 const projectCards = document.querySelectorAll(".project-card");
@@ -37,7 +29,6 @@ function updateCarousel() {
 }
 
 function prevProject() {
-    // console.log('prev')
     if (currentIndex > 0) {
         currentIndex--;
     } else {
@@ -47,7 +38,6 @@ function prevProject() {
 }
 
 function nextProject() {
-    // console.log('next')
     if (currentIndex < projectCards.length - 1) {
         currentIndex++;
     } else {
@@ -56,5 +46,4 @@ function nextProject() {
     updateCarousel();
 }
 
-// Initialize first slide position
 updateCarousel();
