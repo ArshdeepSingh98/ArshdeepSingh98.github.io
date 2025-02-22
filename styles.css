@@ -433,6 +433,14 @@ body.blog-page {
     font-weight: normal;
 }
 
+.blog-entry img {
+    max-width: 100%;
+    display: block;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 
 /* Custom Separator with Centered Circle */
 .separator {
@@ -511,6 +519,8 @@ body.blog-page {
     border-radius: 8px;
     overflow-x: auto;
     font-size: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
 }
 
 /* Code inside the block */
