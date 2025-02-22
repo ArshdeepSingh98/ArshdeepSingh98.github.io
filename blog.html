@@ -9,6 +9,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- MathJax for LaTeX Math Rendering -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script async src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+
 </head>
 
 <body class="blog-page">
@@ -53,9 +69,16 @@
                         blogDiv.classList.add("blog-entry");
                         blogDiv.innerHTML = renderedHTML;
 
+                        // Convert first <u> tag into a link (if any hidden URL exists)
                         convertFirstUnderlineToLink(blogDiv, hiddenUrl);
 
                         blogContainer.appendChild(blogDiv);
+
+                        // ✅ Force MathJax to render new content
+                        if (window.MathJax) {
+                            window.MathJax.typesetPromise([blogDiv]).catch((err) => console.warn("MathJax Error:", err));
+                        }
+
 
                         // Apply syntax highlighting
                         document.querySelectorAll("pre code").forEach((block) => {
@@ -93,8 +116,6 @@
                     underlineElement.replaceWith(anchor);
                 }
             }
-
-
 
             loadBlogs();
         });
