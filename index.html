@@ -1,703 +1,571 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#">
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Arshdeep Sachdeva Portfolio</title>
-    <meta name="description" content="Arshdeep Sachdeva Portfolio" />
-    <meta property="og:title" content="Arshdeep Singh | CS Master's Student | Software Developer" />
-    <meta property="og:description"
-        content="My personal portfolio with detailed overview of my past projects and experience" />
-    <meta property="og:image"
-        content="https://raw.githubusercontent.com/ArshdeepSingh98/ArshdeepSingh98.github.io/mainV2/assets/png/meta-image.png" />
-    <meta property="og:image:secure_url"
-        content="https://raw.githubusercontent.com/ArshdeepSingh98/ArshdeepSingh98.github.io/mainV2/assets/png/meta-image.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="627" />
-    <meta property="og:image:type" content="image/png" />
-    <meta property="og:url" content="https://arshdeepsingh98.github.io/" />
-    <meta property="og:type" content="website" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>My Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
 
-    <link rel="stylesheet" href="css/style.css" />
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Lato', sans-serif;
+        }
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700;900&display=swap"
-        rel="stylesheet" />
-    <link rel="icon" href="./assets/png/favicon.ico" type="image/x-icon" />
-    <link rel="shortcut icon" href="./assets/png/favicon.ico" type="image/x-icon" />
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #464646;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        nav {
+            width: 100%;
+            background: transparent;
+            padding: 20px;
+            display: flex;
+            justify-content: flex-end;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
+
+        a {
+            text-decoration: none;
+            color: #e0e0e0;
+            font-size: 20px;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            height: 100vh;
+            width: 100%;
+            padding: 50px;
+            position: relative;
+        }
+
+        .hero-image {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 45vw;
+            height: auto;
+            overflow: hidden;
+            z-index: 3;
+        }
+
+        .hero-image img {
+            filter: grayscale(100%);
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .details {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .name {
+            position: absolute;
+            left: 23%;
+            top: 20%;
+            font-weight: bold;
+            color: #e0e0e0;
+            text-transform: uppercase;
+            z-index: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 200px;
+            font-weight: bold;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+
+        .empty {
+            width: 55%;
+            height: 400px;
+        }
+
+        .about {
+            width: 55%;
+            text-align: left;
+            /* position: absolute; */
+            color: #e0e0e0;
+            /* right: 10%; */
+            /* top: 50%; */
+            /* transform: translateY(-50%); */
+        }
+
+        .about p {
+            font-size: 22px;
+        }
+
+        .contact-links {
+            width: 100%;
+            background: #242424;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: absolute;
+            bottom: 0;
+            z-index: 4;
+        }
+
+        .contact-links a {
+            text-decoration: none;
+            color: #e0e0e0;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-links a i {
+            font-size: 24px;
+        }
+
+        @keyframes expandQuarter {
+            0% {
+                clip-path: circle(0% at calc(100% - 20px) 20px);
+                background: black;
+            }
+
+            100% {
+                clip-path: circle(100% at calc(100% - 20px) 20px);
+                background: transparent;
+            }
+        }
+
+
+        .projects-quarter {
+            position: absolute;
+            top: 70px;
+            padding: 20px;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            background: black;
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-start;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            clip-path: circle(50px at calc(100% - 20px) 20px);
+            animation: expandQuarter 1.5s ease-out forwards;
+        }
+
+        .projects-quarter button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+
+        /* Full-screen modal for projects */
+        .projects-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #e0e0e0;
+            /* Darker shade of #242424 */
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            padding: 40px;
+        }
+
+        /* Show modal */
+        .projects-modal.active {
+            display: flex;
+        }
+
+        /* Close button */
+        .projects-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 70px;
+            height: 70px;
+            background: #242424;
+            border: 2px solid white;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .projects-filters {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #b6b6b6;
+            border-radius: 8px;
+            padding: 10px;
+            position: relative;
+            gap: 10px;
+            width: fit-content;
+        }
+
+        .projects-filters button {
+            position: relative;
+            background: none;
+            border: none;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease-in-out;
+            z-index: 2;
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
+
+        .projects-filters button.active {
+            color: #b0b0b0;
+            background: #353535;
+        }
+
+        .filter-highlight {
+            position: absolute;
+            height: 100%;
+            width: 0;
+            background: #353535;
+            border-radius: 8px;
+            transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
+            z-index: 1;
+        }
+
+        /* Carousel container */
+        .projects-carousel {
+            width: 80%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            height: 70%;
+            padding: 20px;
+        }
+
+        .projects-carousel-inner {
+            display: flex;
+            width: 90%;
+            height: 100%;
+            gap: 90px;
+            transition: transform 0.5s ease-in-out;
+        }
+
+
+
+        /* Each project card is now a slide */
+        .project-card {
+            flex: 0 0 100%;
+            /* max-width: 80%; */
+            display: flex;
+            align-items: center;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.3s ease-in-out;
+            background-color: white;
+        }
+
+        /* Project image */
+        .project-card img {
+            width: 40%;
+            height: 100%;
+            border-radius: 10px;
+            object-fit: contain;
+        }
+
+        /* Project details */
+        .project-details {
+            padding: 20px;
+            width: 60%;
+        }
+
+        .project-details h3 {
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        .project-details a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            border: 2px solid black;
+            border-radius: 8px;
+            padding: 8px;
+            width: fit-content;
+        }
+
+        .project-details .github-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            /* Space between icons and text */
+            margin-top: 25px;
+            /* Add margin on top */
+            font-size: 20px;
+            color: #000000;
+            text-decoration: none;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .project-details .github-link i {
+            font-size: 24px;
+        }
+
+        /* Navigation buttons */
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            border: 1px solid black;
+            aspect-ratio: 1;
+            padding: 30px;
+            border-radius: 50%;
+            border: none;
+            font-size: 30px;
+            line-height: -20px;
+            cursor: pointer;
+            z-index: 3;
+            box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+            /* Add shadow */
+
+        }
+
+        /* Adjust text position */
+        .carousel-btn i {
+            position: relative;
+            top: -6px;
+            font-size: 30px;
+        }
+
+        .left-btn {
+            left: 20px;
+        }
+
+        .right-btn {
+            right: 20px;
+        }
+
+
+
+        @media (min-width: 1900px) {
+            .hero-image img {
+                clip-path: inset(0% 0% 10% 0%);
+                transform: translateY(10%);
+            }
+        }
+
+        @media (max-width: 1400px) {
+            .name {
+                font-size: 120px;
+            }
+
+        }
+
+        @media (min-width: 2200px) {
+            .hero-image img {
+                /* clip-path: inset(0% 0% 12% 0%); */
+                /* transform: translateY(12%); */
+                width: 30vw;
+            }
+
+            .about {
+                width: 50%;
+            }
+
+            .empty {
+                width: 50%;
+            }
+        }
+
+
+        /* Small Phones (Portrait) */
+        @media (max-width: 480px) {
+            /* Styles for small phones */
+        }
+
+        /* Medium Phones & Small Tablets */
+        @media (max-width: 768px) {
+            .hero-image {
+                width: 320px;
+                left: 20%;
+            }
+
+            .details {}
+
+            .name {
+                font-size: 60px;
+                width: 100%;
+                left: 15%;
+            }
+
+            .empty {
+                height: 100px;
+            }
+
+            .about {
+                width: 100%;
+            }
+
+            .about p {
+                font-size: 24px;
+            }
+
+            .contact-links a span {
+                display: none;
+            }
+        }
+
+
+        /* Large Phones & Tablets */
+        @media (max-width: 1024px) {
+            /* Styles for large phones & small tablets */
+        }
+    </style>
 </head>
 
 <body>
-    <header class="header">
-        <div class="header__content">
-            <div class="header__logo-container">
-                <div class="header__logo-img-cont">
-                    <img src="./assets/png/arshdeep.png" alt="Arshdeep Icon" class="header__logo-img" />
-                </div>
-                <span class="header__logo-sub">Arshdeep Singh Sachdeva</span>
-            </div>
-            <div class="header__main">
-                <ul class="header__links">
-                    <li class="header__link-wrapper">
-                        <a href="./index.html" class="header__link">
-                            Home
-                        </a>
-                    </li>
-                    <li class="header__link-wrapper">
-                        <a href="./index.html#about" class="header__link">
-                            About
-                        </a>
-                    </li>
-                    <li class="header__link-wrapper">
-                        <a href="./index.html#projects" class="header__link">
-                            Projects
-                        </a>
-                    </li>
-                    <li class="header__link-wrapper">
-                        <a href="./index.html#experience" class="header__link">
-                            Experience
-                        </a>
-                    </li>
-                    <li class="header__link-wrapper">
-                        <a href="./index.html#certificates" class="header__link">
-                            Certificates
-                        </a>
-                    </li>
-                    <li class="header__link-wrapper">
-                        <a href="./index.html#contact" class="header__link">
-                            Contact
-                        </a>
-                    </li>
-                </ul>
-                <div class="header__main-ham-menu-cont">
-                    <img src="./assets/svg/ham-menu.svg" alt="hamburger menu" class="header__main-ham-menu" />
-                    <img src="./assets/svg/ham-menu-close.svg" alt="hamburger menu close"
-                        class="header__main-ham-menu-close d-none" />
-                </div>
+    <nav>
+        <!-- <a href="#">Experience</a> -->
+        <a href="#">Blog</a>
+    </nav>
+    <div class="container">
+        <div class="projects-quarter" id="projectsLink">
+            <button>Projects</button>
+        </div>
+        <div class="hero-image">
+            <img src="profile_hero_image.png" alt="Arshdeep">
+        </div>
+        <div class="details">
+            <h1 class="name">Arshdeep <br> Singh</h1>
+            <h1 class="empty"></h1>
+            <div class="about">
+                <p>I am an experienced software engineer with 3 years of experience with expertise in building ML
+                    pipelines,
+                    training ML models, EDA (Exploratory Data Analysis), feature-engineering, as well as full-stack
+                    development with deploying
+                    at
+                    scale and CI/CD deployment.</p>
             </div>
         </div>
-        <div class="header__sm-menu">
-            <div class="header__sm-menu-content">
-                <ul class="header__sm-menu-links">
-                    <li class="header__sm-menu-link">
-                        <a href="./index.html"> Home </a>
-                    </li>
 
-                    <li class="header__sm-menu-link">
-                        <a href="./index.html#about"> About </a>
-                    </li>
+    </div>
+    <div class="contact-links">
+        <a href="https://www.linkedin.com/in/asach/" target="_blank" rel="noopener noreferrer"><i
+                class="fab fa-linkedin"></i> <span>LinkedIn</span></a>
+        <a href="asroideva@gmail.com"><i class="far fa-envelope" target="_blank" rel="noopener noreferrer"></i>
+            <span>Email</span></a>
+        <a href="https://drive.google.com/file/d/1z3UwL5p8Wo3Y36QHFHllJuu745Ve2juV/view?usp=sharing" target="_blank"
+            rel="noopener noreferrer"><i class="fas fa-file"></i> <span>Resume</span></a>
+        <a href="https://github.com/ArshdeepSingh98" target="_blank" rel="noopener noreferrer"><i
+                class="fab fa-github"></i> <span>GitHub</span></a>
+        <!-- <a href="#"><i class="fab fa-twitter"></i> <span>Twitter</span></a> -->
+    </div>
 
-                    <li class="header__sm-menu-link">
-                        <a href="./index.html#projects"> Projects </a>
-                    </li>
+    <!-- Projects Modal -->
+    <div class="projects-modal" id="projectsModal">
+        <button class="projects-close" onclick="toggleProjectsModal()">✖</button>
 
-                    <li class="header__sm-menu-link">
-                        <a href="./index.html#experience"> Experience </a>
-                    </li>
-
-                    <li class="header__sm-menu-link">
-                        <a href="./index.html#contact"> Contact </a>
-                    </li>
-                </ul>
-            </div>
+        <!-- Filters -->
+        <div class="projects-filters">
+            <div class="filter-highlight"></div>
+            <button data-filter="all" class="active">All</button>
+            <button data-filter="web">Web</button>
+            <button data-filter="ml">ML</button>
+            <button data-filter="data-science">Data Science</button>
         </div>
-    </header>
-    <section class="home-hero">
-        <div class="home-hero__content">
-            <h2 class="heading-primary-small">
-                Hey<span class="blinking-cursor"></span>
-            </h2>
-            <h1 class="heading-primary">I'm Arshdeep Singh</h1>
-            <div class="home-hero__info">
-                <p class="text-primary">
-                    I'm a computer science graduate student at Arizona State
-                    University <br />
-                    actively looking for full-time opportunities starting
-                    May 24
-                </p>
-            </div>
-            <div class="home-buttons-container">
-                <div class="home-hero__cta">
-                    <a href="./#projects" class="btn btn--bg">Projects</a>
-                </div>
-                <div class="home-hero__cta">
-                    <a href="https://drive.google.com/file/d/1tu5TtdvrD1FhpKlGrDIkgi_d6REHQC85/view?usp=sharing"
-                        target="_blank" class="btn btn--bg">Resume</a>
-                </div>
-
-            </div>
-            <div class="home-buttons-container home-buttons-new-container">
-                <div class="home-hero__cta">
-                    <a href="./#certificates" class="btn btn--bg">Certificates</a>
-                </div>
-            </div>
-        </div>
-        <div class="home-hero__socials">
-            <div class="home-hero__social">
-                <a href="https://www.linkedin.com/in/asach/" class="home-hero__social-icon-link">
-                    <img src="./assets/png/linkedin-ico.png" alt="icon" class="home-hero__social-icon" />
-                </a>
-            </div>
-            <div class="home-hero__social">
-                <a href="https://github.com/ArshdeepSingh98" class="home-hero__social-icon-link">
-                    <img src="./assets/png/github-ico.png" alt="icon" class="home-hero__social-icon" />
-                </a>
-            </div>
-            <div class="home-hero__social">
-                <a href="https://twitter.com/asachw" class="home-hero__social-icon-link">
-                    <img src="./assets/png/twitter-ico.png" alt="icon" class="home-hero__social-icon" />
-                </a>
-            </div>
-            <div class="home-hero__social">
-                <a href="https://www.instagram.com/arshdeepsinghsachdeva/"
-                    class="home-hero__social-icon-link home-hero__social-icon-link--bd-none">
-                    <img src="./assets/png/insta-ico.png" alt="icon" class="home-hero__social-icon" />
-                </a>
-            </div>
-        </div>
-        <div class="home-hero__mouse-scroll-cont">
-            <div class="mouse"></div>
-        </div>
-    </section>
-    <section id="about" class="about sec-pad">
-        <div class="main-container">
-            <h2 class="heading heading-sec heading-sec__mb-med">
-                <span class="heading-sec__main">About Me</span>
-                <span class="heading-sec__sub">
-                    As a dedicated front-end and machine learning enthusiast
-                    with over 2 years of software development experience,
-                    I'm committed to crafting seamless user experiences and
-                    solving complex challenges by prioritizing a philosophy
-                    that values understanding problems over mere coding.
-                    Currently a student, I bring a diverse skill set and a
-                    passion for creating meaningful solutions to the
-                    ever-evolving tech landscape.
-                </span>
-            </h2>
-            <div class="about__content">
-                <div class="about__content-main">
-                    <h3 class="about__content-title">Get to know me!</h3>
-                    <div class="about__content-details">
-                        <p class="about__content-details-para">
-                            Hey! It's
-                            <strong>Arshdeep Singh</strong>
-                            and I'm a student with
-                            <strong> Frontend Web Development </strong>
-                            experience, located in U.S. (Flexible to
-                            relocate nationwide / Remote). I've done
-                            projects for personal, research and production
-                            environment and collaborated with many talented
-                            individuals in my professional journey so far.
-                        </p>
-                        <p class="about__content-details-para">
-                            I have a can-do attitude and am willing to go beyond the
-                            initial expectations.
-                            I'm a bit of a technology junky and like to
-                            explore new digital products. Feel free to
-                            <strong>contact</strong> me here.
-                        </p>
-                    </div>
-                    <a href="./#contact" class="btn btn--med btn--theme dynamicBgClr">Contact</a>
-                </div>
-                <div class="about__content-skills">
-                    <h3 class="about__content-title">My Skills</h3>
-                    <div class="skills">
-                        <div class="skills__skill">React</div>
-                        <div class="skills__skill">HTML</div>
-                        <div class="skills__skill">CSS</div>
-                        <div class="skills__skill">Python</div>
-                        <div class="skills__skill">
-                            JavaScript / TypeScript
-                        </div>
-                        <div class="skills__skill">SASS</div>
-                        <div class="skills__skill">styled-components</div>
-                        <div class="skills__skill">
-                            Reactive Programming
-                        </div>
-                        <div class="skills__skill">Apache Kafka</div>
-                        <div class="skills__skill">Next.js</div>
-                        <div class="skills__skill">GIT</div>
-                        <div class="skills__skill">
-                            Google Cloud Platform
-                        </div>
-                        <div class="skills__skill">Firebase</div>
-                        <div class="skills__skill">AWS</div>
-                        <div class="skills__skill">Docker</div>
-                        <div class="skills__skill">Kubernetes</div>
-                        <div class="skills__skill">Grafana</div>
-                        <div class="skills__skill">Kotlin</div>
-                        <div class="skills__skill">C / C++</div>
-                        <div class="skills__skill">PostgreSQL / MySQL</div>
-                        <div class="skills__skill">Laravel / PHP</div>
-                        <div class="skills__skill">Spring</div>
-                        <div class="skills__skill">Java</div>
-                        <div class="skills__skill">Latex / MathJax</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section id="projects" class="projects sec-pad">
-        <div class="main-container">
-            <h2 class="heading heading-sec heading-sec__mb-bg">
-                <span class="heading-sec__main">Projects</span>
-                <span class="heading-sec__sub">
-                    My projects both personal and team projects pertaining
-                    to software development, front-end and machine learning
-                    roles
-                </span>
-            </h2>
-
-            <div class="projects__content">
-                <div class="projects__grid">
-                    <div class="projects__item">
-                        <div class="projects__row-content">
-                            <h3 class="projects__row-content-title">
-                                Real Time Chat Application
-                            </h3>
-                            <p class="projects__row-content-desc">
-                                Developed a feature-rich application employing the MERN stack (MongoDB, Express.js,
-                                React.js, Node.js) and Socket.io.
-                                This application provides a robust and dynamic user experience by seamlessly integrating
-                                real-time messages through
-                                the private chats, allowing users to add emojis along with text and their messages are
-                                kept safe by using login authentication throughout
-                                the application.
-                            </p>
-                            <a href="https://github.com/ArshdeepSingh98/Real-Time-Chat-Application"
-                                class="btn btn--med btn--theme dynamicBgClr" target="_blank">Github Link</a>
-                        </div>
-                    </div>
-
-                    <div class="projects__item">
-                        <div class="projects__row-content">
-                            <h3 class="projects__row-content-title">
-                                D3 Visualizations
-                            </h3>
-                            <p class="projects__row-content-desc">
-                                Demonstration of Data Visualization projects
-                                via interactive graphs and visualizations
-                                using CORGIS Global Development and Soviet
-                                Space Dogs dataset. They showcase
-                                proficiency in utilizing tools such as
-                                D3.js, Javascript, Bootstrap, CSS, and HTML.
-                            </p>
-                            <a href="https://github.com/ArshdeepSingh98/D3-Data-Visualizations"
-                                class="btn btn--med btn--theme dynamicBgClr" target="_blank">Github Link</a>
-                        </div>
-                    </div>
-
-                    <div class="projects__item">
-                        <div class="projects__row-content">
-                            <h3 class="projects__row-content-title">
-                                Twitter Clone Mobile Application
-                            </h3>
-                            <p class="projects__row-content-desc">
-                                Developed a Twitter clone in Android Studio
-                                using Twitter's API in Java. Created a
-                                user-friendly interface with features like
-                                login, home feed, trending, follow, image
-                                uploads to tweets, and advanced options such
-                                as long-click actions and dark mode. The
-                                project demonstrates proficiency in mobile
-                                app development and object-oriented
-                                programming.
-                            </p>
-                            <a href="https://github.com/ArshdeepSingh98/TwitterVOne"
-                                class="btn btn--med btn--theme dynamicBgClr" target="_blank">Github Link</a>
-                        </div>
-                    </div>
-
-                    <div class="projects__item">
-                        <div class="projects__row-content">
-                            <h3 class="projects__row-content-title">
-                                Deep Reinforcement Learning on Robotic Agents
-                            </h3>
-                            <p class="projects__row-content-desc">
-                                This project focuses on applying Deep Reinforcement Learning (RL) algorithms to train
-                                agents
-                                in two distinct environments provided by the Gym library: Cartpole and Humanoid.
-                                The Cartpole agent learns to balance itself, while the Humanoid agent learns to walk.
-                                I utilized the Stable Baselines3 library, Gymnasium, and MuJoCo for efficient
-                                implementation
-                                and realistic physics simulation.
-                            </p>
-                            <a href="https://github.com/ArshdeepSingh98/Deep-Reinforcement-Learning-on-Robotic-Agents"
-                                class="btn btn--med btn--theme dynamicBgClr" target="_blank">Github Link</a>
-                        </div>
-                    </div>
 
 
-                    <div class="projects__item">
-                        <div class="projects__row-content">
-                            <h3 class="projects__row-content-title">
-                                Image Classification And Adversarial Attack
-                            </h3>
-                            <p class="projects__row-content-desc">
-                                Classification of images into a number of
-                                classes (FashionMNIST dataset) using a CNN
-                                model. Additionally, adversarial attacks has
-                                been implemented on the model and the
-                                effected accuracy has been calculated. This
-                                demonstrates how minute changes in the
-                                images of training data can significantly
-                                impact the model's accuracy
-                            </p>
-                            <a href="https://github.com/ArshdeepSingh98/Image-Classification-and-Adversarial-Attacks"
-                                class="btn btn--med btn--theme dynamicBgClr" target="_blank">Github Link</a>
-                        </div>
-                    </div>
+        <!-- Carousel -->
+        <div class="projects-carousel">
+            <button class="carousel-btn left-btn" onclick="prevProject()"> <i class="fas fa-chevron-left"></i></button>
 
-                    <div class="projects__item">
-                        <div class="projects__row-content">
-                            <h3 class="projects__row-content-title">
-                                Movie Recommendation Analysis and User
-                                Interface
-                            </h3>
-                            <p class="projects__row-content-desc">
-                                Analyzing and comparing movie recommendation
-                                systems using Netflix customer ratings data.
-                                Evaluating methods like KNN, KMeans, DNN,
-                                and Matrix Factorization. Offering a
-                                user-friendly web interface for users to
-                                input movie/user IDs and receive
-                                recommendations for similar movies.
-                            </p>
-                            <a href="https://github.com/ArshdeepSingh98/Movie-Recommendation-Systems-Analysis"
-                                class="btn btn--med btn--theme dynamicBgClr" target="_blank">Github Link</a>
-                        </div>
-                    </div>
-
-                    <div class="projects__item">
-                        <div class="projects__row-content">
-                            <h3 class="projects__row-content-title">
-                                SightAid: Virtual Assistant for Visually
-                                Impaired
-                            </h3>
-                            <p class="projects__row-content-desc">
-                                A mobile app for the visually impaired
-                                includes a Braille keyboard for typing using
-                                gestures and buttons, with text-to-speech
-                                and haptic feedback. It also has an Object
-                                Detection module using a camera for
-                                real-time awareness through audio feedback.
-                                The app uses a MobileNetwork with SSD
-                                (Single Shot Detector) model to classify
-                                objects in images, aiming to improve daily
-                                experiences and promote inclusivity for the
-                                visually impaired.
-                            </p>
-                            <a href="https://github.com/ArshdeepSingh98/SightAid-Virtual-Assistant-Visual-Impaired"
-                                class="btn btn--med btn--theme dynamicBgClr" target="_blank">Github Link</a>
-                        </div>
-                    </div>
-
-                    <div class="projects__item">
-                        <div class="projects__row-content">
-                            <h3 class="projects__row-content-title">
-                                Reinforcement Learning in Question
-                                Generation
-                            </h3>
-                            <p class="projects__row-content-desc">
-                                The project centers around refining question
-                                creation by utilizing Reinforcement Learning
-                                to fine-tune a base Language Model. It
-                                evaluates and compares these novel
-                                approaches to assess their effectiveness and
-                                the improvements they introduce.
-                            </p>
-                            <a href="https://github.com/ArshdeepSingh98/Evaluation-Reward-Function-Question-Generation"
-                                class="btn btn--med btn--theme dynamicBgClr" target="_blank">Github Link</a>
-                        </div>
-                    </div>
-
-                    <div class="projects__item">
-                        <div class="projects__row-content">
-                            <h3 class="projects__row-content-title">
-                                Code Threat Detection
-                            </h3>
-                            <p class="projects__row-content-desc">
-                                This project aims to assess if a code
-                                snippets found in online forums pose system
-                                threats. Using NLP for text summarization
-                                and Natural Language Inference, it checks
-                                for vulnerability keywords found in the
-                                generated summaries to determine the
-                                presence of potential threats.
-                            </p>
-                            <a href="https://github.com/ArshdeepSingh98/Vulnerability-Centric-Code-Summarization"
-                                class="btn btn--med btn--theme dynamicBgClr" target="_blank">Github Link</a>
-                        </div>
-                    </div>
-
-                    <div class="projects__item">
-                        <div class="projects__row-content">
-                            <h3 class="projects__row-content-title">
-                                Phone Directory in C++
-                            </h3>
-                            <p class="projects__row-content-desc">
-                                The Phone Directory project showcases my proficiency in C++ programming,
-                                highlighting skills in memory management through pointers, the application of
-                                Object-Oriented Programming (OOP) concepts, and the utilization of complex data
-                                structures, including trie, hashmaps, and sets. In this project, I designed and
-                                implemented an efficient phone directory system with features such as insertion,
-                                deletion, and search functionalities.
-                            </p>
-                            <a href="https://github.com/ArshdeepSingh98/Phone-Directory"
-                                class="btn btn--med btn--theme dynamicBgClr" target="_blank">Github Link</a>
-                        </div>
-                    </div>
-
-                    <div class="projects__item">
-                        <div class="projects__row-content">
-                            <h3 class="projects__row-content-title">
-                                Minesweeper, Othello, & Tic-Tac-Toe using Java
-                            </h3>
-                            <p class="projects__row-content-desc">
-                                Explore a collection of Android games meticulously that provide an immersive gaming
-                                experience crafted in Java using Android Studio,
-                                showcasing my expertise in mobile application development along with a solid grasp of
-                                core Object-Oriented Programming (OOP) concepts
-                                like inheritance, abstraction, and polymorphism. Elevating the challenge level, Othello
-                                features an intelligent AI opponent that player
-                                can play against made using Minimax algorithm with alpha-beta pruning.
-                            </p>
-                            <a href="https://github.com/ArshdeepSingh98/Othello"
-                                class="btn btn--med btn--theme dynamicBgClr" target="_blank">Github Link</a>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
-    <section id="experience" class="projects sec-pad sec-border">
-        <div class="main-container">
-            <h2 class="heading heading-sec heading-sec__mb-bg">
-                <span class="heading-sec__main">Experience</span>
-            </h2>
-
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-date">Aug 2020 - Jul 2022</div>
-                    <div class="timeline-content">
-                        <h3>Web Development Engineer</h3>
-                        <div class="timeline-place">
-                            <h4>OYO Rooms</h4>
-                            <div class="timeline-date-mobile">
-                                Aug 2020 - Jul 2022
-                            </div>
-                        </div>
-
-                        <p>
-                        <ul class="custom-list">
-                            <li>Used Google Tag Manager (GTM), Tealium, Emarsys for enabliing customer data platform
-                                with tracking such as how much a perticular property is being visited</li>
-                            <!-- <li>Added AB testing tools like Kameleoon and Google Analytics to vet various implemented features on the website. Integrated and measured the third-party ad campaigns like Userwerk GmbH using them.</li> -->
-                            <li>Hands-on Experience testing a web application using Junit and Selenium framework along
-                                with Jenkins, Maven and Git</li>
-                            <li>Involved in Continuous Integration, Continuous Deployment (CI/CD), environment
-                                management, Build and release process. Adapted Gitlab build pipeline with Docker image
-                                and Kubernetes for deployment and tag generation for version control</li>
-                            <li>Optimized website performace using CDN and caching mechanisms, ensuring fast load times
-                                and a responsive design, enhancing the overall user experience</li>
-                            <li>Created configuration files in YAML to generate ingress resources that safeguarded the
-                                website’s certificates. Managed deployment files for services in the Kubernetes cluster,
-                                dealing with heap size, replica counts, and CPU usage.</li>
-                            <!-- <li>Maintained a headless content management system, which worked as a storage of the static and generalized data for different web pages. Used MongoDB queries to build APIs for the stored data. These APIs were designed to be extensible and could be combined in various ways to create different use cases.</li> -->
-                            <li>Collaborated closely with cross-functional teams, utilizing Docker and Kubernetes for
-                                seamless integration and scalable deployment of front-end and back-end functionalities
-                            </li>
-                            <li>Regularly updated the website leverating Webpack and Babel for bundling and transpiling,
-                                continuously interating to improve both functionality and user interface based on Agile
-                                methodologies</li>
-                            <li>Engineered a responsive map view page, seamlessly integrating homeowners' properties
-                                using Google's Marker Clustering API. Implemented user-friendly features, including
-                                robust search filters, leading to a substantial ~18% increase in user conversion rates
-                                and enhancing overall user engagement.</li>
-                            <li>Enhanced website performance through strategic optimizations, including the
-                                implementation of debouncers, incorporation of lazy loading for background images in
-                                carousels, removal of redundant HTML/JS code, and integration of server-side rendering
-                                (SSR) with Next.js. These initiatives resulted in a remarkable improvement, elevating
-                                the PageSpeed score from 20 to an impressive 85.</li>
-                            <li>Guided and facilitated scrum meetings for a 5-member team, adhering to agile
-                                methodologies to maximize team productivity. This leadership role significantly
-                                contributed to a streamlined development process, fostering collaboration and ultimately
-                                leading to the successful completion of projects.</li>
-                            <li>Executed A/B testing using Kameleoon in a production environment, leveraging data-driven
-                                insights to inform strategic decision-making and enhance overall performance. Integrated
-                                and measured the third-party ad campaigns like Userwerk GmbH using them. The findings
-                                from these tests contributed to a 15% improvement in key metrics, driving informed
-                                optimizations.</li>
-                            <li>Designed a cookie consent layer and integrated CI/CD YAML files in Docker containers
-                                which enhanced pipeline efficiency and saved 3+ dev days monthly.</li>
-                            <li>Spearheaded the creation of a Backend For Frontend (BFF) translation layer, leveraging
-                                Spring Webflux to aggregate microservices. The addition of abstraction and improved
-                                error handling not only elevated development experience but also resulted in a 25%
-                                increase in overall system efficiency.</li>
-                            <li>Implemented a headless Content Management System (CMS) to efficiently manage centralized
-                                static data using REST APIs written with MongoDB queries, facilitating content
-                                segregation based on Locale to support our German expansion, optimizing organizational
-                                content strategy</li>
-                            <li>Integrated and Implemented third-party API for ad-campaign after completion of booking
-                                flow, lead to increase in revenue</li>
-                        </ul>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-date">Jan 2019 - Jun 2019</div>
-                    <div class="timeline-content">
-                        <h3>Software Engineer Intern</h3>
-                        <div class="timeline-place">
-                            <h4>OYO Rooms</h4>
-                            <div class="timeline-date-mobile">
-                                Jan 2019 - Jun 2019
-                            </div>
-                        </div>
-
-                        <p>
-
-                        <ul class="custom-list">
-                            <li>Executed the integration of diverse payment options for customers, enabled seamless
-                                editing of property information for homeowners, and streamlined the booking flow within
-                                the OYO Life website. Additionally, played a pivotal role in implementing a new design
-                                for OYO Life homepage, collectively enhancing user experience and functionality. This
-                                comprehensive approach contributed to a 25% increase in user retention rate.</li>
-                            <li>Enhanced website performance through the implementation of linting tools, including
-                                ESLint for code quality and Lighthouse for response time optimization. These
-                                optimizations resulted in a more robust and efficient website experience, ensuring both
-                                code integrity and faster response times.</li>
-                            <li>Proof of Concept for following features: React Hook, Apache Thrift API, and SSR (Server
-                                Side Rendering).</li>
-                        </ul>
-                        <!-- Enhanced OYO Life housing website and mobile
-                                app, migrating from React Native to
-                                React/TypeScript, resulting in a ~16% revenue
-                                increase in 6 months. Conducted ESLint-based
-                                code linting on a 15,000+ line repository to
-                                ensure code quality. Migrated to Amazon Elastic
-                                Kubernetes Service (EKS) using Node.js, MongoDB,
-                                and Redux to improve performance. -->
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="certificates" class="certificates sec-pad sec-border">
-        <div class="main-container">
-            <h2 class="heading heading-sec heading-sec__mb-bg">
-                <span class="heading-sec__main">Certificates</span>
-            </h2>
-            <div class="certificates__content">
-                <div class="certificates_grid">
-                    <a href="https://drive.google.com/file/d/1NdrYJhXFLWTobZifxtFikMM9YU-lU_l8/view?usp=sharing"
-                        target="_blank" class="certificates__item cert1">
-                        <div class="certificates__item-bottomText">
-                            AWS Cloud Technical Essentials
-                        </div>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1ZBYTEbHgBEH4azUs54WGqGVK8EjGpCYn/view?usp=sharing"
-                        target="_blank" class="certificates__item cert2">
-                        <div class="certificates__item-bottomText">
-                            Full-Stack Web Development with React Specialization (3 Courses)
-                        </div>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1uS1aiJBKxe8PZfPv2mW2z_rq10Gwht6B/view?usp=sharing"
-                        target="_blank" class="certificates__item cert3">
-                        <div class="certificates__item-bottomText">
-                            Deep Learning Specialization (5 Courses)
-                        </div>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1paGGtsftFyhcOrkTXGKyadFU_CdRM14s/view?usp=sharing"
-                        target="_blank" class="certificates__item cert4">
-                        <div class="certificates__item-bottomText">
-                            Fundamentals of Reinforcement Learning
-                        </div>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1fXh2DmoD_lbbRNNmsCOZfMliqHwC2A1B/view?usp=sharing"
-                        target="_blank" class="certificates__item cert5">
-                        <div class="certificates__item-bottomText">
-                            Facial Expression Classification Using Residual Neural Nets
-                        </div>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1ehjzDq06BYWkpQGMlOZoHqni915IXD3X/view?usp=sharing"
-                        target="_blank" class="certificates__item cert6">
-                        <div class="certificates__item-bottomText">
-                            Front-End Web UI Frameworks and Tools: Bootstrap 4 (With Honors)
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="contact sec-pad dynamicBg">
-        <div class="main-container">
-            <h2 class="heading heading-sec heading-sec__mb-med">
-                <span class="heading-sec__main heading-sec__main--lt">Contact</span>
-                <span class="heading-sec__sub heading-sec__sub--lt">
-                    I'm excited to explore job opportunities! <br />
-                    If you have a role that aligns with my skills or just
-                    want to chat about the tech world, feel free to reach
-                    out. <br />
-                    I'm eager to connect and learn. Drop me a message, and
-                    let's discuss the possibilities!
-
-                    <br />
-                    <br />
-                    asroideva@gmail.com, +1(425)900-2413
-                </span>
-            </h2>
-            <a class="email-link" href="mailto:asroideva@gmail.com" rel="noopener noreferrer" target="_blank">Email
-                me!</a>
-        </div>
-    </section>
-    <footer class="main-footer">
-        <div class="main-container">
-            <div class="main-footer__upper">
-                <div class="main-footer__row main-footer__row-1">
-                    <h2 class="heading heading-sm main-footer__heading-sm">
-                        <span>Social</span>
-                    </h2>
-                    <div class="main-footer__social-cont">
-                        <a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/asach/">
-                            <img class="main-footer__icon" src="./assets/png/linkedin-ico.png" alt="icon" />
-                        </a>
-                        <a target="_blank" rel="noreferrer" href="https://github.com/ArshdeepSingh98">
-                            <img class="main-footer__icon" src="./assets/png/github-ico.png" alt="icon" />
-                        </a>
-                        <a target="_blank" rel="noreferrer" href="https://twitter.com/asachw">
-                            <img class="main-footer__icon" src="./assets/png/twitter-ico.png" alt="icon" />
-                        </a>
-                        <a target="_blank" rel="noreferrer" href="https://www.instagram.com/arshdeepsinghsachdeva/">
-                            <img class="main-footer__icon main-footer__icon--mr-none" src="./assets/png/insta-ico.png"
-                                alt="icon" />
+            <div class="projects-carousel-inner">
+                <div class="project-card">
+                    <img src="project1.webp" alt="Project Image">
+                    <div class="project-details">
+                        <h3>Text-Conversation-Agent</h3>
+                        <p>This project is a chatbot application that interacts with PDF documents using LangChain and
+                            Ollama for local natural language processing capabilities. It also features a frontend built
+                            using ReactJS for a user-friendly interface.</p>
+                        <a href="https://github.com/ArshdeepSingh98/Text-Conversation-Agent" target="_blank"
+                            class="github-link">
+                            <i class="fab fa-github"></i> GitHub
+                            <i class="fas fa-arrow-up-right"></i>
                         </a>
                     </div>
                 </div>
-                <div class="main-footer__row main-footer__row-2">
-                    <h4 class="heading heading-sm text-lt">
-                        Arshdeep Singh Sachdeva
-                    </h4>
-                    <p class="main-footer__short-desc">
-                        Aspiring software engineer with a passion for
-                        front-end development and a keen interest in machine
-                        learning technology. Let's connect and explore
-                        exciting opportunities in the world of technology!
-                    </p>
-                </div>
-            </div>
-        </div>
-    </footer>
 
-    <script src="./index.js"></script>
+                <div class="project-card">
+                    <img src="project2.webp" alt="Project Image">
+                    <div class="project-details">
+                        <h3>Global Development Data Visualizations</h3>
+                        <p>Analyzed and processed comparative country development data using Pandas and NumPy,
+                            then visualized growth trends with React and D3.js, enabling insightful trend analysis
+                            across the nation.</p>
+                        <a href="https://github.com/ArshdeepSingh98/D3-Data-Visualizations" target="_blank"
+                            class="github-link">
+                            <i class="fab fa-github"></i> GitHub
+                            <i class="fas fa-arrow-up-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <!--
+
+                <div class="project-card">
+                    <img src="project1.jpg" alt="Project Image">
+                    <div class="project-details">
+                        <h3>Project Title 3</h3>
+                        <p>Project description goes here. A brief overview of the project.</p>
+                        <a href="#" target="_blank" class="github-link">
+                            <i class="fab fa-github"></i> GitHub
+                            <i class="fas fa-arrow-up-right"></i>
+                        </a>
+                    </div>
+                </div> -->
+            </div>
+            <button class="carousel-btn left-btn" onclick="prevProject()"> <i class="fas fa-chevron-left"></i></button>
+            <button class="carousel-btn right-btn" onclick="nextProject()"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+
 </body>
 
 </html>
