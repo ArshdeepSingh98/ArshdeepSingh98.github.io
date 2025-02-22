@@ -76,25 +76,17 @@ a {
 }
 
 .name {
-    position: absolute;
-    left: 25%;
-    top: 20%;
+    width: 55%;
     font-weight: bold;
     color: #e0e0e0;
     text-transform: uppercase;
     z-index: 1;
-    white-space: nowrap;
+    white-space: break-space;
     overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 200px;
+    font-size: 160px;
     font-weight: bold;
     text-transform: uppercase;
     z-index: 2;
-}
-
-.empty {
-    width: 55%;
-    height: 400px;
 }
 
 .about {
@@ -548,7 +540,7 @@ code {
 
 @media (max-width: 1400px) {
     .name {
-        font-size: 120px;
+        font-size: 100px;
     }
 
 }
@@ -558,12 +550,12 @@ code {
         width: 30vw;
     }
 
-    .about {
-        width: 50%;
+    .name {
+        width: 70%;
     }
 
-    .empty {
-        width: 50%;
+    .about {
+        width: 70%;
     }
 }
 
@@ -588,10 +580,6 @@ code {
         left: 15%;
     }
 
-    .empty {
-        height: 100px;
-    }
-
     .about {
         width: 100%;
     }
@@ -602,6 +590,10 @@ code {
 
     .contact-links a span {
         display: none;
+    }
+
+    .container {
+        align-items: flex-start;
     }
 }
 
