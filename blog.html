@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -21,7 +21,6 @@
             }
         };
     </script>
-    <script async src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 
@@ -31,6 +30,10 @@
     <nav>
         <a class="blog-nav" href="index.html">Home</a>
     </nav>
+    <div class="sidebar" id="sidebar">
+        <div class="directory-heading">Directory</div>
+        <div id="directory"></div>
+    </div>
     <div class="blog-container" id="blog-container"></div>
     <div id="footer-container"></div>
 
@@ -47,58 +50,115 @@
     <script>
         document.addEventListener("DOMContentLoaded", async function () {
             const blogContainer = document.getElementById("blog-container");
-            let fileIndex = 1; // Start from 1
-            let hasMoreFiles = true;
+            const directoryContainer = document.getElementById("directory");
+            let folders = ["projects", "experiences"]; // Example folders
+            let blogFiles = {};
 
-            async function loadBlogs() {
-                while (hasMoreFiles) {
-                    let filePath = `blogs/${fileIndex}.md`;
+            function highlightActiveFile(activeFileId) {
+                document.querySelectorAll(".file").forEach(fileDiv => {
+                    if (fileDiv.dataset.id === activeFileId) {
+                        fileDiv.classList.add("active");
+                    } else {
+                        fileDiv.classList.remove("active");
+                    }
+                });
+            }
 
+            async function fetchBlogs(folder) {
+                blogFiles[folder] = [];
+
+                while (true) {
+                    let fileIndex = blogFiles[folder].length + 1;
+                    let filePath = `blogs/${folder}/${fileIndex}.md`;
                     try {
                         let response = await fetch(filePath);
-                        if (!response.ok) throw new Error("File not found"); // Stop loop on 404
-
+                        if (!response.ok) throw new Error("File not found");
                         let content = await response.text();
-                        const regex = new RegExp("<!--\\s*([\\s\\S]*?)\\s*-->", "m");
-                        let match = content.match(regex);
-                        let hiddenUrl = match ? match[1] : null;
-
-                        let renderedHTML = marked.parse(content);
-
-                        let blogDiv = document.createElement("div");
-                        blogDiv.classList.add("blog-entry");
-                        blogDiv.innerHTML = renderedHTML;
-
-                        // Convert first <u> tag into a link (if any hidden URL exists)
-                        convertFirstUnderlineToLink(blogDiv, hiddenUrl);
-
-                        blogContainer.appendChild(blogDiv);
-
-                        // ✅ Force MathJax to render new content
-                        if (window.MathJax) {
-                            window.MathJax.typesetPromise([blogDiv]).catch((err) => console.warn("MathJax Error:", err));
-                        }
-
-
-                        // Apply syntax highlighting
-                        document.querySelectorAll("pre code").forEach((block) => {
-                            hljs.highlightElement(block);
-                        });
-
-
-                        // Add separator after each blog
-                        let separator = document.createElement("div");
-                        separator.classList.add("separator");
-                        separator.innerHTML = "<span></span>"; // The centered dot
-                        blogContainer.appendChild(separator);
-
-                        fileIndex++; // Go to next file
+                        let match = content.match(/<u>(.*?)<\/u>/);
+                        let fileName = match ? match[1] : `Post ${fileIndex}`;
+                        let fileId = `${folder}-${fileIndex}.md`;
+                        blogFiles[folder].push({ fileName, fileIndex, fileId });
                     } catch (error) {
-                        // console.warn(`Stopping at blog ${fileIndex} (file not found)`);
-                        hasMoreFiles = false; // Stop loop if file is missing
+                        break;
                     }
                 }
             }
+
+
+            function renderDirectory() {
+                directoryContainer.innerHTML = "";
+                folders.forEach(folder => {
+                    let folderDiv = document.createElement("div");
+                    folderDiv.classList.add("folder");
+                    folderDiv.innerHTML = `<i class='fas fa-folder' style="color: #FFD43B;"></i> ${folder}`;
+                    directoryContainer.appendChild(folderDiv);
+
+                    let fileList = document.createElement("div");
+                    (blogFiles[folder] || []).forEach(({ fileName, fileIndex, fileId }) => {
+                        let fileDiv = document.createElement("div");
+                        fileDiv.classList.add("file");
+                        fileDiv.innerHTML = `<i class='fas fa-file-alt' style="color: #ADD2FD;"></i> ${fileName}`;
+                        fileDiv.dataset.file = `${fileIndex}.md`;
+                        fileDiv.dataset.folder = folder;
+                        fileDiv.dataset.id = fileId;
+                        fileDiv.addEventListener("click", () => loadBlog(folder, `${fileIndex}.md`, fileId));
+                        fileList.appendChild(fileDiv);
+                    });
+                    directoryContainer.appendChild(fileList);
+                });
+            }
+
+            async function initialize() {
+                for (const folder of folders) {
+                    await fetchBlogs(folder);
+                }
+                renderDirectory();
+                loadActiveContent();
+            }
+
+            function loadActiveContent() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const name = urlParams.get("name");
+
+                if (name) {
+                    const [folder, file] = name.split("/");
+                    const fileId = `${folder}-${file}`;
+                    loadBlog(folder, file, fileId);
+                    highlightActiveFile(fileId);
+                }
+            }
+
+            async function loadBlog(folder, file, fileId) {
+                let filePath = `blogs/${folder}/${file}`;
+                try {
+                    let response = await fetch(filePath);
+                    if (!response.ok) throw new Error("File not found");
+                    let content = await response.text();
+                    const regex = new RegExp("<!--\\s*([\\s\\S]*?)\\s*-->", "m");
+                    let match = content.match(regex);
+                    let hiddenUrl = match ? match[1] : null;
+                    let renderedHTML = marked.parse(content);
+                    blogContainer.innerHTML = `<div class='blog-entry'>${renderedHTML}</div>`;
+
+                    // Convert first <u> tag into a link (if any hidden URL exists)
+                    convertFirstUnderlineToLink(blogContainer, hiddenUrl);
+
+                    if (window.MathJax) {
+                        window.MathJax.typesetPromise([blogContainer]).catch((err) => console.warn("MathJax Error:", err));
+                    }
+
+                    document.querySelectorAll("pre code").forEach((block) => {
+                        hljs.highlightElement(block);
+                    });
+
+                    highlightActiveFile(fileId);
+                    window.history.pushState({}, "", `?name=${folder}/${file}`);
+                } catch (error) {
+                    console.error("Error loading blog:", error);
+                }
+            }
+
+            initialize();
 
             function convertFirstUnderlineToLink(container, url) {
                 const underlineElement = container.querySelector("u"); // Find the first <u> tag
@@ -116,8 +176,6 @@
                     underlineElement.replaceWith(anchor);
                 }
             }
-
-            loadBlogs();
         });
     </script>
 
