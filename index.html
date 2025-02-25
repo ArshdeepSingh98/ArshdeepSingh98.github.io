@@ -11,95 +11,24 @@
 
 <body>
     <nav>
-        <!-- <a href="#">Experience</a> -->
-        <a href="blog.html">Blog</a>
+        <a href="blog.html">Blogs and Projects</a>
     </nav>
     <div class="container">
-        <div class="projects-quarter" id="projectsLink">
-            <button>Projects</button>
-        </div>
         <div class="hero-image">
             <img src="profile_hero_image.png" alt="Arshdeep">
         </div>
         <div class="details">
             <h1 class="name">Arshdeep Singh</h1>
             <div class="about">
-                <p>I am an experienced software engineer with 3 years of experience with expertise in building ML
-                    pipelines,
-                    training ML models, EDA (Exploratory Data Analysis), feature-engineering, as well as full-stack
-                    development with deploying
-                    at
-                    scale and CI/CD deployment.</p>
+                <p>I am an experienced software engineer with 2.5 years of experience with expertise in building ML
+                    pipelines, training ML models, EDA (Exploratory Data Analysis), feature-engineering, as well as
+                    full-stack
+                    development with deploying at scale and CI/CD deployment.</p>
             </div>
         </div>
-
     </div>
     <div id="footer-container"></div>
-
-    <!-- Projects Modal -->
-    <div class="projects-modal" id="projectsModal">
-        <button class="projects-close" onclick="toggleProjectsModal()">✖</button>
-
-        <!-- Filters -->
-        <div class="projects-filters">
-            <div class="filter-highlight"></div>
-            <button data-filter="all" class="active">All</button>
-            <button data-filter="web">Web</button>
-            <button data-filter="ml">ML</button>
-            <button data-filter="data-science">Data Science</button>
-        </div>
-
-
-        <!-- Carousel -->
-        <div class="projects-carousel">
-            <button class="carousel-btn left-btn" onclick="prevProject()"> <i class="fas fa-chevron-left"></i></button>
-
-            <div class="projects-carousel-inner">
-                <div class="project-card">
-                    <img src="project1.webp" alt="Project Image">
-                    <div class="project-details">
-                        <h3>Text-Conversation-Agent</h3>
-                        <p>This project is a chatbot application that interacts with PDF documents using LangChain and
-                            Ollama for local natural language processing capabilities. It also features a frontend built
-                            using ReactJS for a user-friendly interface.</p>
-                        <a href="https://github.com/ArshdeepSingh98/Text-Conversation-Agent" target="_blank"
-                            class="github-link">
-                            <i class="fab fa-github"></i> GitHub
-                            <i class="fas fa-arrow-up-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <img src="project2.webp" alt="Project Image">
-                    <div class="project-details">
-                        <h3>Global Development Data Visualizations</h3>
-                        <p>Analyzed and processed comparative country development data using Pandas and NumPy,
-                            then visualized growth trends with React and D3.js, enabling insightful trend analysis
-                            across the nation.</p>
-                        <a href="https://github.com/ArshdeepSingh98/D3-Data-Visualizations" target="_blank"
-                            class="github-link">
-                            <i class="fab fa-github"></i> GitHub
-                            <i class="fas fa-arrow-up-right"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <button class="carousel-btn left-btn" onclick="prevProject()"> <i class="fas fa-chevron-left"></i></button>
-            <button class="carousel-btn right-btn" onclick="nextProject()"><i class="fas fa-chevron-right"></i></button>
-        </div>
-    </div>
-    <script>
-        fetch('footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById("footer-container").innerHTML = data;
-            })
-            .catch(error => console.error("Error loading footer:", error));
-    </script>
-
     <script src="script.js"></script>
-
 </body>
 
 </html>
