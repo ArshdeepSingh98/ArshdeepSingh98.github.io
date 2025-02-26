@@ -264,6 +264,17 @@ body.blog-page {
 .blog-entry ul,
 .blog-entry ol {
     margin-bottom: 20px;
+    padding-left: 20px;
+}
+
+.blog-entry li {
+    margin-bottom: 5px;
+}
+
+.blog-entry ul ul,
+.blog-entry ol ol {
+    margin-left: 20px;
+    /* Indents nested lists */
 }
 
 /* Add spacing for blockquotes */
@@ -319,22 +330,26 @@ code {
 }
 
 .directory-heading {
-    font-size: 18px;
+    font-size: 1.5em;
     font-weight: bold;
     margin-bottom: 30px;
 }
 
 .folder {
     font-weight: bold;
+    font-size: 1em;
 }
 
 .file {
     padding-left: 24px;
     cursor: pointer;
+    font-size: 0.8em;
+    color: #dbdbdb
 }
 
 .file.active {
     background: rgba(255, 255, 255, 0.2);
+    color: white;
 }
 
 .blog-container {
