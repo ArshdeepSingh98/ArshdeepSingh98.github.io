@@ -427,6 +427,7 @@ code {
         font-size: 30px;
         width: 100%;
         left: 15%;
+        margin-top: 50px;
     }
 
     .about {
@@ -446,6 +447,7 @@ code {
 
     .container {
         align-items: flex-start;
+        padding: 20px;
     }
 
     .blog-entry {
