@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog</title>
+    <title>Blogs by Arshdeep</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
     <link rel="stylesheet" href="styles.css">
@@ -30,6 +30,7 @@
     <nav>
         <a class="blog-nav" href="index.html">Home</a>
     </nav>
+    <div class="toggle-sidebar" id="toggleSidebar">Other Projects</div>
     <div class="sidebar" id="sidebar">
         <div class="directory-heading">Directory</div>
         <div id="directory"></div>
@@ -176,6 +177,21 @@
                     underlineElement.replaceWith(anchor);
                 }
             }
+
+            const sidebar = document.getElementById("sidebar");
+            const toggleSidebar = document.getElementById("toggleSidebar");
+
+            toggleSidebar.addEventListener("click", function () {
+                sidebar.classList.toggle("open");
+            });
+
+            document.addEventListener("click", function (event) {
+                if (!sidebar.contains(event.target) && !toggleSidebar.contains(event.target)) {
+                    if (window.innerWidth < 768) {
+                        sidebar.classList.remove("open");
+                    }
+                }
+            });
         });
     </script>
 
