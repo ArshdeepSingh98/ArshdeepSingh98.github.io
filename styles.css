@@ -323,27 +323,27 @@ code {
     top: 0;
     width: 300px;
     height: 100vh;
-    background: #222;
+    background: #242424;
     color: white;
     padding: 10px;
     overflow-y: auto;
 }
 
 .directory-heading {
-    font-size: 1.5em;
+    font-size: 2em;
     font-weight: bold;
     margin-bottom: 30px;
 }
 
 .folder {
     font-weight: bold;
-    font-size: 1em;
+    font-size: 1.2em;
 }
 
 .file {
     padding-left: 24px;
     cursor: pointer;
-    font-size: 0.8em;
+    font-size: 1em;
     color: #dbdbdb
 }
 
