@@ -7,6 +7,10 @@
     font-family: 'Lato', sans-serif;
 }
 
+html {
+    overflow: hidden;
+}
+
 body {
     display: flex;
     flex-direction: column;
