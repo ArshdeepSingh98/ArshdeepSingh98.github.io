@@ -476,7 +476,7 @@ code {
         margin-top: 20px;
         height: calc(100vh - 206px);
         overflow-y: scroll;
-        padding-bottom: 100px;
+        padding-bottom: 60px;
     }
 
     .contact-links a span {
