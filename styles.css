@@ -439,6 +439,9 @@ code {
     }
 }
 
+/* [A,       B, C] */
+/* [D, E, F, B, G] */
+
 
 /* Small Phones (Portrait) */
 @media (max-width: 480px) {
