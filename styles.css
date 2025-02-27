@@ -336,6 +336,25 @@ code {
     transform: translateX(0);
 }
 
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s;
+    z-index: 10;
+}
+
+.overlay.active {
+    visibility: visible;
+    opacity: 1;
+}
+
 .toggle-sidebar {
     display: none;
     position: fixed;
@@ -358,8 +377,14 @@ code {
 }
 
 .folder {
-    font-weight: bold;
+    font-weight: normal;
     font-size: 1.2em;
+    color: #FFD43B;
+}
+
+.folder.active {
+    color: white;
+    font-weight: bold;
 }
 
 .file {
@@ -423,8 +448,8 @@ code {
 /* Medium Phones & Small Tablets */
 @media (max-width: 768px) {
     .hero-image {
-        width: 320px;
-        left: 20%;
+        width: 160px;
+        left: calc(50% - 80px);
     }
 
     .name {
@@ -441,7 +466,7 @@ code {
     .about p {
         font-size: 18px;
         margin-top: 20px;
-        height: 450px;
+        height: 70vh;
         overflow-y: scroll;
     }
 

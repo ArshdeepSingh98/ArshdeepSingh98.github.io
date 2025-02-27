@@ -31,6 +31,7 @@
         <a class="blog-nav" href="index.html">Home</a>
     </nav>
     <div class="toggle-sidebar" id="toggleSidebar">Other Projects</div>
+    <div class="overlay" id="overlay"></div>
     <div class="sidebar" id="sidebar">
         <div class="directory-heading">Directory</div>
         <div id="directory"></div>
@@ -59,6 +60,10 @@
                 document.querySelectorAll(".file").forEach(fileDiv => {
                     if (fileDiv.dataset.id === activeFileId) {
                         fileDiv.classList.add("active");
+                        let folderDiv = fileDiv.parentElement.previousElementSibling;
+                        if (folderDiv && folderDiv.classList.contains("folder")) {
+                            folderDiv.classList.add("active");
+                        }
                     } else {
                         fileDiv.classList.remove("active");
                     }
@@ -102,7 +107,13 @@
                         fileDiv.dataset.file = `${fileIndex}.md`;
                         fileDiv.dataset.folder = folder;
                         fileDiv.dataset.id = fileId;
-                        fileDiv.addEventListener("click", () => loadBlog(folder, `${fileIndex}.md`, fileId));
+                        fileDiv.addEventListener("click", () => {
+                            loadBlog(folder, `${fileIndex}.md`, fileId);
+                            document.querySelectorAll(".file").forEach(el => el.classList.remove("active"));
+                            fileDiv.classList.add("active");
+                            document.querySelectorAll(".folder").forEach(el => el.classList.remove("active"));
+                            folderDiv.classList.add("active");
+                        });
                         fileList.appendChild(fileDiv);
                     });
                     directoryContainer.appendChild(fileList);
@@ -179,10 +190,17 @@
             }
 
             const sidebar = document.getElementById("sidebar");
+            const overlay = document.getElementById("overlay");
             const toggleSidebar = document.getElementById("toggleSidebar");
 
             toggleSidebar.addEventListener("click", function () {
                 sidebar.classList.toggle("open");
+                overlay.classList.toggle("active");
+            });
+
+            overlay.addEventListener("click", function () {
+                sidebar.classList.remove("open");
+                overlay.classList.remove("active");
             });
 
             document.addEventListener("click", function (event) {
