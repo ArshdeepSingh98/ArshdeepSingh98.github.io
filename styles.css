@@ -448,8 +448,12 @@ code {
 /* Medium Phones & Small Tablets */
 @media (max-width: 768px) {
     .hero-image {
-        width: 160px;
-        left: calc(50% - 80px);
+        clip-path: inset(0% 0% 45% 0%);
+        transform: translateY(45%);
+        width: 100px;
+        left: 0;
+        bottom: 64px;
+        z-index: 5;
     }
 
     .name {
@@ -466,7 +470,7 @@ code {
     .about p {
         font-size: 18px;
         margin-top: 20px;
-        height: 70vh;
+        height: calc(100vh - 206px);
         overflow-y: scroll;
     }
 
