@@ -53,8 +53,54 @@
         document.addEventListener("DOMContentLoaded", async function () {
             const blogContainer = document.getElementById("blog-container");
             const directoryContainer = document.getElementById("directory");
-            let folders = ["projects", "experiences", "leetcode_algorithms", "LLD"];
-            let blogFiles = {};
+            let blogFiles = {
+                "projects": [
+                    { fileId: "projects-1.md", fileIndex: 1, fileName: "House Price Prediction EDA" },
+                    { fileId: "projects-2.md", fileIndex: 2, fileName: "PDF Citation Agent" },
+                    { fileId: "projects-3.md", fileIndex: 3, fileName: "National Trend Visualizer" }
+                ],
+                "experiences": [
+                    { fileId: "experiences-1.md", fileIndex: 1, fileName: "Meta Onsite Experience" },
+                    { fileId: "experiences-2.md", fileIndex: 2, fileName: "TikTok Onsite Experience" },
+                    { fileId: "experiences-3.md", fileIndex: 3, fileName: "Uber Onsite Experience" },
+                    { fileId: "experiences-4.md", fileIndex: 4, fileName: "Amazon Onsite Experience" }
+                ],
+                "leetcode_algorithms": [
+                    { fileId: "leetcode_algorithms-1.md", fileIndex: 1, fileName: "Dijkstra Algorithm" },
+                    { fileId: "leetcode_algorithms-2.md", fileIndex: 2, fileName: "Bellman-Ford" },
+                    { fileId: "leetcode_algorithms-3.md", fileIndex: 3, fileName: "Floyd-Warshall Algorithm" },
+                    { fileId: "leetcode_algorithms-4.md", fileIndex: 4, fileName: "Trie (Prefix Tree)" },
+                    { fileId: "leetcode_algorithms-5.md", fileIndex: 5, fileName: "Union-Find (Disjoint Set Union or DSU)" },
+                    { fileId: "leetcode_algorithms-6.md", fileIndex: 6, fileName: "Topological Sort" },
+                    { fileId: "leetcode_algorithms-7.md", fileIndex: 7, fileName: "MST - Prims/Kruskal Algorithm" },
+                    { fileId: "leetcode_algorithms-8.md", fileIndex: 8, fileName: "Morris Traversal" },
+                    { fileId: "leetcode_algorithms-9.md", fileIndex: 9, fileName: "Monotonic Stack" },
+                    { fileId: "leetcode_algorithms-10.md", fileIndex: 10, fileName: "Monotonic Queue" },
+                    { fileId: "leetcode_algorithms-11.md", fileIndex: 11, fileName: "Radix Sort" },
+                    { fileId: "leetcode_algorithms-12.md", fileIndex: 12, fileName: "Bucket Sort" },
+                    { fileId: "leetcode_algorithms-13.md", fileIndex: 13, fileName: "Detect Cycle" },
+                    { fileId: "leetcode_algorithms-14.md", fileIndex: 14, fileName: "Backtracking" },
+                    { fileId: "leetcode_algorithms-15.md", fileIndex: 15, fileName: "Regex" },
+                    { fileId: "leetcode_algorithms-16.md", fileIndex: 16, fileName: "Wormhole Teleportation technique" },
+                    { fileId: "leetcode_algorithms-17.md", fileIndex: 17, fileName: "Bipartite graph" },
+                    { fileId: "leetcode_algorithms-18.md", fileIndex: 18, fileName: "Cycle Sort" },
+                    { fileId: "leetcode_algorithms-19.md", fileIndex: 19, fileName: "Custom Sorting Comparator" },
+                    { fileId: "leetcode_algorithms-20.md", fileIndex: 20, fileName: "Fenwick Tree/Binary Indexed Tree" },
+                    { fileId: "leetcode_algorithms-21.md", fileIndex: 21, fileName: "Segment Tree" },
+                    { fileId: "leetcode_algorithms-22.md", fileIndex: 22, fileName: "KMP - needle in haystack" },
+                    { fileId: "leetcode_algorithms-23.md", fileIndex: 23, fileName: "Rabin-Karp/Rolling Hash" },
+                    { fileId: "leetcode_algorithms-24.md", fileIndex: 24, fileName: "Line Sweep" }
+                ],
+                "LLD": [
+                    { fileId: "LLD-1.md", fileIndex: 1, fileName: "Hit Counter" },
+                    { fileId: "LLD-2.md", fileIndex: 2, fileName: "Twitter" },
+                    { fileId: "LLD-3.md", fileIndex: 3, fileName: "Snake Game" },
+                    { fileId: "LLD-4.md", fileIndex: 4, fileName: "Memory Allocator" },
+                    { fileId: "LLD-5.md", fileIndex: 5, fileName: "Circular Queue" },
+                    { fileId: "LLD-6.md", fileIndex: 6, fileName: "TinyURL - Encode and Decode" }
+                ]
+            };
+
 
             function highlightActiveFile(activeFileId) {
                 document.querySelectorAll(".file").forEach(fileDiv => {
@@ -70,30 +116,9 @@
                 });
             }
 
-            async function fetchBlogs(folder) {
-                blogFiles[folder] = [];
-
-                while (true) {
-                    let fileIndex = blogFiles[folder].length + 1;
-                    let filePath = `blogs/${folder}/${fileIndex}.md`;
-                    try {
-                        let response = await fetch(filePath);
-                        if (!response.ok) throw new Error("File not found");
-                        let content = await response.text();
-                        let match = content.match(/<u>(.*?)<\/u>/);
-                        let fileName = match ? match[1] : `Post ${fileIndex}`;
-                        let fileId = `${folder}-${fileIndex}.md`;
-                        blogFiles[folder].push({ fileName, fileIndex, fileId });
-                    } catch (error) {
-                        break;
-                    }
-                }
-            }
-
-
             function renderDirectory() {
                 directoryContainer.innerHTML = "";
-                folders.forEach(folder => {
+                Object.keys(blogFiles).forEach(folder => {
                     let folderDiv = document.createElement("div");
                     folderDiv.classList.add("folder");
                     folderDiv.innerHTML = `<i class='fas fa-folder' style="color: #FFD43B;"></i> ${folder}`;
@@ -121,9 +146,7 @@
             }
 
             async function initialize() {
-                for (const folder of folders) {
-                    await fetchBlogs(folder);
-                }
+                console.log(blogFiles)
                 renderDirectory();
                 loadActiveContent();
             }
